@@ -26,6 +26,9 @@ templateTablePath = os.path.join('templates', 'picturesTable.html')
 pic_dir = 'static/pictures'
 
 class TableGenerator:
+    def __init__(this):
+        pass
+
     ## Creates a new table with pictures and buttons
     def createPicturesTable(this):
         return this.fillPictureTable()
@@ -46,7 +49,8 @@ class TableGenerator:
         template = template.replace("[PICTURE-NAME]", filename.split('/')[-1])
         return template
 
-FlaskApp = Flask(__name__)
+FlaskApp = Flask(__name__)  
+tableGenerator = TableGenerator()
 
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():
@@ -78,11 +82,11 @@ def Index():
                     removeFile(picture_path)
 
         FlaskApp.logger.info("Generating table of available pictures")
-        return TableGenerator.createPicturesTable()
+        return tableGenerator.createPicturesTable()
     
     elif request.method == 'GET':
         FlaskApp.logger.info("Generating table of available pictures")
-        return TableGenerator.createPicturesTable()
+        return tableGenerator.createPicturesTable()
 
 
 

@@ -48,9 +48,17 @@ class TableGenerator:
         template = template.replace("[PICTURE-PATH]", f'{pic_dir}/{filename}')
         template = template.replace("[PICTURE-NAME]", filename.split('/')[-1])
         return template
+    
+class NeoPixelWrapper:
+    def __init__(this):
+        pass
+
+    def startPicture(this, filename: str):
+        pass
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator()
+neopixel = NeoPixelWrapper()
 
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():
@@ -74,12 +82,15 @@ def Index():
 
         ## check status of buttons
         else:
-            FlaskApp.logger.info("Checking all pictures to match deletion request...")
+            FlaskApp.logger.info("Checking all pictures to match button request...")
             for picture_path in os.listdir(pic_dir):
                 FlaskApp.logger.info(f"Checking {picture_path}")
                 if request.form.get(f'delete-{picture_path}') == 'DELETE':
                     FlaskApp.logger.info(f"Deleting {picture_path}")
                     removeFile(picture_path)
+                elif request.form.get(f'start-{picture_path}') == 'START':
+                    FlaskApp.logger.info(f"Starting {picture_path}")
+                    neopixel.startPicture(picture_path)
 
         FlaskApp.logger.info("Generating table of available pictures")
         return tableGenerator.createPicturesTable()

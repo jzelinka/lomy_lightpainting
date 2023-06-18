@@ -1,9 +1,11 @@
-# i want to write a simple python flask app which will allow me to control the neopixel strip
-
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 import os, logging
 from logging.config import dictConfig
+
+## custom defined imports
+from neopixelWrapper import NeoPixelWrapper
+from tablegenerator import TableGenerator
 
 dictConfig({
     'version': 1,
@@ -25,40 +27,11 @@ templateTableRowPath = os.path.join('templates', 'pictureTableRow.html')
 templateTablePath = os.path.join('templates', 'picturesTable.html')
 pic_dir = 'static/pictures'
 
-class TableGenerator:
-    def __init__(this):
-        pass
 
-    ## Creates a new table with pictures and buttons
-    def createPicturesTable(this):
-        return this.fillPictureTable()
-
-    ## Fills the table with all pictures in the picture directory
-    def fillPictureTable(this):
-        rows = ""
-        for picture_path in os.listdir(pic_dir):
-            rows += this.fillTableRow(picture_path)
-        template = open(templateTablePath).read()
-        template = template.replace("[PICTURE-ROWS]", rows)
-        return template
-
-    ## Fills a table row with the picture and buttons
-    def fillTableRow(this, filename: str):
-        template = open(templateTableRowPath).read()
-        template = template.replace("[PICTURE-PATH]", f'{pic_dir}/{filename}')
-        template = template.replace("[PICTURE-NAME]", filename.split('/')[-1])
-        return template
-    
-class NeoPixelWrapper:
-    def __init__(this):
-        pass
-
-    def startPicture(this, filename: str):
-        pass
 
 FlaskApp = Flask(__name__)  
-tableGenerator = TableGenerator()
-neopixel = NeoPixelWrapper()
+tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
+neopixel = NeoPixelWrapper(18, 0.1, 0.1)
 
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():
@@ -84,13 +57,17 @@ def Index():
         else:
             FlaskApp.logger.info("Checking all pictures to match button request...")
             for picture_path in os.listdir(pic_dir):
+
                 FlaskApp.logger.info(f"Checking {picture_path}")
+
                 if request.form.get(f'delete-{picture_path}') == 'DELETE':
                     FlaskApp.logger.info(f"Deleting {picture_path}")
                     removeFile(picture_path)
+
                 elif request.form.get(f'start-{picture_path}') == 'START':
-                    FlaskApp.logger.info(f"Starting {picture_path}")
-                    neopixel.startPicture(picture_path)
+                    image_path = os.path.join(pic_dir, picture_path)
+                    FlaskApp.logger.info(f"Starting {image_path}")
+                    neopixel.load_image(image_path)
 
         FlaskApp.logger.info("Generating table of available pictures")
         return tableGenerator.createPicturesTable()
@@ -109,5 +86,3 @@ def removeFile(filename: str):
 
 if __name__ == "__main__":
         FlaskApp.run(host='0.0.0.0', debug=True)
-    # TODO use on rpi to run on prot 80
-    # FlaskApp.run(host='0.0.0.0', port=80, debug=True)

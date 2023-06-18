@@ -5,11 +5,11 @@ from PIL import Image
 class DotStarWrapper:
     def __init__(self, delay):
         self.num_pixels = 216 # Number of pixels in the DotStar strip
-        self.pin_sck = 19
-        self.pin_moci = 23
+        self.pin_sck = 11
+        self.pin_mosi = 10
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_moci, self.num_pixels, brightness=0.2, auto_write=False)
+        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=0.1, baudrate=3000000, auto_write=False)
         
         ## image data
         self.image = None
@@ -33,14 +33,17 @@ class DotStarWrapper:
 
         self.new_height = self.num_pixels ## height corresponds to the number of pixels
         self.new_width = int(self.new_height * image_ratio) ## width is calculated based on the ratio
-        
+
+        self.imageWidth = self.new_width
+        self.imageHeight = self.new_height
+
         # resize and convert the image into a RGB matrix
         self.image = originalImage.resize((self.new_width, self.new_height)).convert("RGB")
 
         self.lineIndex = 0
         self.lastPrintTime = 0
 
-        self.pixels.brightness = 0.2
+        self.pixels.brightness = 0.1
         self.isLoaded = True
     
     def print_image(self):
@@ -49,7 +52,7 @@ class DotStarWrapper:
             if self.isLoaded:
                 if not self.print_next_line():
                     self.isLoaded = False
-                    self.pixels.brightness = 0.0
+                    self.pixels.fill((0,0,0))
 
     ## returning TRUE when image is still printing
     ## returning FALSE when image is fully printed

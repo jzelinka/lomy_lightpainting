@@ -32,7 +32,7 @@ pic_dir = 'static/pictures'
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
-neopixel = DotStarWrapper(0.5)
+neopixel = DotStarWrapper(0.05)
 
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():

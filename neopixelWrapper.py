@@ -53,6 +53,8 @@ class DotStarWrapper:
                 if not self.print_next_line():
                     self.isLoaded = False
                     self.pixels.fill((0,0,0))
+                    self.pixels.show()
+                    print('Finished printing')
 
     ## returning TRUE when image is still printing
     ## returning FALSE when image is fully printed
@@ -76,4 +78,5 @@ class DotStarWrapper:
 
         self.lineIndex += 1
         self.lastPrintTime = current_time
+        print('Printing line', self.lineIndex)
         return True  # Image printing is in progress

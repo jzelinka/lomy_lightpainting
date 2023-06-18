@@ -5,7 +5,7 @@ from logging.config import dictConfig
 from threading import Thread
 
 ## custom defined imports
-from neopixelWrapper import NeoPixelWrapper
+from neopixelWrapper import DotStarWrapper
 from tablegenerator import TableGenerator
 
 dictConfig({
@@ -32,7 +32,7 @@ pic_dir = 'static/pictures'
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
-neopixel = NeoPixelWrapper(18, 0.1, 0.1)
+neopixel = DotStarWrapper(0.5)
 
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():

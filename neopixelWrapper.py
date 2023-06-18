@@ -2,12 +2,14 @@ import time
 import adafruit_dotstar as dotstar
 from PIL import Image
 
-class NeoPixelWrapper:
-    def __init__(self,pin_sck, pin_moci, delay):
+class DotStarWrapper:
+    def __init__(self, delay):
         self.num_pixels = 216 # Number of pixels in the DotStar strip
+        self.pin_sck = 19
+        self.pin_moci = 23
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        self.pixels = dotstar.DotStar(pin_sck, pin_moci, self.num_pixels, brightness=0.2, auto_write=False)
+        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_moci, self.num_pixels, brightness=0.2, auto_write=False)
         
         ## image data
         self.image = None
@@ -37,6 +39,8 @@ class NeoPixelWrapper:
 
         self.lineIndex = 0
         self.lastPrintTime = 0
+
+        self.pixels.brightness = 0.2
         self.isLoaded = True
     
     def print_image(self):
@@ -45,6 +49,7 @@ class NeoPixelWrapper:
             if self.isLoaded:
                 if not self.print_next_line():
                     self.isLoaded = False
+                    self.pixels.brightness = 0.0
 
     ## returning TRUE when image is still printing
     ## returning FALSE when image is fully printed

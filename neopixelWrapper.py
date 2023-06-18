@@ -1,14 +1,13 @@
 import time
-# import neopixel
+import adafruit_dotstar as dotstar
 from PIL import Image
-import numpy as np
 
 class NeoPixelWrapper:
-    def __init__(self,pin, timeOn, timeOff):
-        self.num_pixels = 80
+    def __init__(self,pin_sck, pin_moci, delay):
+        self.num_pixels = 216 # Number of pixels in the DotStar strip
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        # self.pixels = neopixel.NeoPixel(pin, self.num_pixels, pixel_order=neopixel.RGB,auto_write=False)
+        self.pixels = dotstar.DotStar(pin_sck, pin_moci, self.num_pixels, brightness=0.2, auto_write=False)
         
         ## image data
         self.image = None
@@ -19,8 +18,9 @@ class NeoPixelWrapper:
         self.lastPrintTime = 0
 
         ## milliseconds expected
-        self.lightOnTime = timeOn  # time length for how long do the LEDs stay on
-        self.lightOffTime = timeOff  # time break between turning on the next vertical line
+        self.ledDelay = delay
+
+        self.isLoaded = False
 
     def load_image(self, image_path):
         # Open the image
@@ -37,13 +37,23 @@ class NeoPixelWrapper:
 
         self.lineIndex = 0
         self.lastPrintTime = 0
+        self.isLoaded = True
+    
+    def print_image(self):
+        ## infinite loop
+        while True:
+            if self.isLoaded:
+                if not self.print_next_line():
+                    self.isLoaded = False
 
+    ## returning TRUE when image is still printing
+    ## returning FALSE when image is fully printed
     def print_next_line(self):
         if self.lineIndex >= self.imageWidth:
             return False  # Image is fully printed
 
         current_time = time.time()
-        if current_time - self.lastPrintTime < self.lightOnTime:
+        if current_time - self.lastPrintTime < self.ledDelay:
             return True  # Delay not reached, wait for the next iteration
 
         # Iterate through each pixel in the current line and set the corresponding Neopixel color

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
-import os, logging
+import os
 from logging.config import dictConfig
+from threading import Thread
 
 ## custom defined imports
 from neopixelWrapper import NeoPixelWrapper
@@ -76,8 +77,6 @@ def Index():
         FlaskApp.logger.info("Generating table of available pictures")
         return tableGenerator.createPicturesTable()
 
-
-
 def removeFile(filename: str):
     if os.path.isfile(os.path.join(pic_dir, filename)):
         os.remove(os.path.join(pic_dir, filename))
@@ -85,4 +84,6 @@ def removeFile(filename: str):
     return False
 
 if __name__ == "__main__":
+        imageThread = Thread(target=neopixel.print_image, daemon=True)
+        imageThread.start()
         FlaskApp.run(host='0.0.0.0', debug=True)

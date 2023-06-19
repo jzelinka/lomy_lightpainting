@@ -77,6 +77,15 @@ def Index():
         FlaskApp.logger.info("Generating table of available pictures")
         return tableGenerator.createPicturesTable()
 
+@FlaskApp.route('/off', methods=['GET', 'POST'])
+def Off():
+    if request.method == 'POST' and request.form['off_button'] == 'Turn Off':
+        FlaskApp.logger.info("Turning off")
+        os.system("shutdown /s /t 1")
+        
+    FlaskApp.logger.info("Rendering off.html")
+    return render_template('off.html')
+
 def removeFile(filename: str):
     if os.path.isfile(os.path.join(pic_dir, filename)):
         os.remove(os.path.join(pic_dir, filename))

@@ -81,7 +81,7 @@ def Index():
 def Off():
     if request.method == 'POST' and request.form['off_button'] == 'Turn Off':
         FlaskApp.logger.info("Turning off")
-        os.system("shutdown /s /t 1")
+        os.system("shutdown now")
         
     FlaskApp.logger.info("Rendering off.html")
     return render_template('off.html')

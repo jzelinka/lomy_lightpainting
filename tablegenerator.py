@@ -13,7 +13,8 @@ class TableGenerator:
     ## Fills the table with all pictures in the picture directory
     def fillPictureTable(self):
         rows = ""
-        for picture_path in os.listdir(self.pic_dir):
+        pictures = list(filter(lambda x: x.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff')), os.listdir(self.pic_dir)))
+        for picture_path in pictures:
             rows += self.fillTableRow(picture_path)
         template = open(self.templateTablePath).read()
         template = template.replace("[PICTURE-ROWS]", rows)

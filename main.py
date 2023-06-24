@@ -86,6 +86,14 @@ def Off():
     FlaskApp.logger.info("Rendering off.html")
     return render_template('off.html')
 
+@FlaskApp.route('/simple', methods=['GET', 'POST'])
+def Simple():
+    FlaskApp.logger.info("Rendering simple.html")
+    # if request
+    # prepare functions to create numpy arrays with appropriate pixel values
+    # make numpy array with pixels
+    return render_template('simple.html')
+
 def removeFile(filename: str):
     if os.path.isfile(os.path.join(pic_dir, filename)):
         os.remove(os.path.join(pic_dir, filename))

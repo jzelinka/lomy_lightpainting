@@ -2,3 +2,4 @@ adafruit-circuitpython-dotstar==2.2.9
 Flask
 Pillow
 numpy
+matplotlib

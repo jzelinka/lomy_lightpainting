@@ -7,7 +7,7 @@ from threading import Thread
 ## custom defined imports
 from neopixelWrapper import DotStarWrapper
 from tablegenerator import TableGenerator
-from simpleInterface import SimpleInterface
+from simpleInterface import simple_interface
 
 dictConfig({
     'version': 1,
@@ -34,8 +34,8 @@ pic_dir = 'static/pictures'
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
-SimpleInterface = SimpleInterface(templeteSimple)
 neopixel = DotStarWrapper(0.05)
+simple_interface = simple_interface(templeteSimple, neopixel.num_pixels)
 
 @FlaskApp.route('/img_redirect')
 def Img_redirect():
@@ -102,18 +102,23 @@ def Simple():
     if request.method == 'POST':
         if request.form.get('add_color') == 'Add color':
             color = request.form.get('color')
-            SimpleInterface.add_color(color)
+            simple_interface.add_color(color)
+
         elif request.form.get('rotate90'):
             FlaskApp.logger.info("rotating 90 degs")
-            SimpleInterface.rotate90()
+            simple_interface.rotate90()
+
         elif request.form.get('grad'):
             FlaskApp.logger.info("changing grad/just light model")
+
         elif request.form.get('start') == "START":
-            SimpleInterface.display_image()
+            simple_interface.display_image()
+
         elif request.form.get('delete_color'):
             color_idx = request.form.get('color')
             FlaskApp.logger.info(f"Deleting color number {color_idx}")
-            SimpleInterface.remove_color(color_idx)
+            simple_interface.remove_color(color_idx)
+
         return redirect(url_for('Simple_redir'))
         
         # TODO somehow clear the form
@@ -121,7 +126,7 @@ def Simple():
     # if request
     # prepare functions to create numpy arrays with appropriate pixel values
     # make numpy array with pixels
-    return SimpleInterface.render()
+    return simple_interface.render()
 
 def removeFile(filename: str):
     if os.path.isfile(os.path.join(pic_dir, filename)):

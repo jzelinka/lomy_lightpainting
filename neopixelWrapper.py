@@ -9,7 +9,8 @@ class DotStarWrapper:
         self.pin_mosi = 10
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=0.1, baudrate=3000000, auto_write=False)
+        # self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=0.1, baudrate=3000000, auto_write=False)
+        self.pixels = []
         
         ## image data
         self.image = None
@@ -23,6 +24,13 @@ class DotStarWrapper:
         self.ledDelay = delay
 
         self.isLoaded = False
+
+    
+    def load_numpy_array(self, numpy_array):
+        # create tmp image from numpy array
+        # load image for drawing
+        # delete tmp image
+        pass
 
     def load_image(self, image_path):
         # Open the image

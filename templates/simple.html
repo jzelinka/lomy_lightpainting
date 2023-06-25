@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color mixer</title>
+</head>
+
+<body>
+    <center>
+        <h1>Color mixer</h1>
+        Mix colors, create picture, save and play it from the <a href="/">player</a>
+        <!-- add color -->
+        <form method="POST">
+            <input type="color" name="color">
+            <input type="submit" name="add_color" value="Add color">
+        </form>
+
+        <!-- width -->
+        <form method="POST">
+            <input type="number" name="width" value="{{ width }}" min="10" max="1000">
+            <input type="submit" name="set_width" value="Set width">
+        </form>
+
+        <!-- display colors -->
+        {% if colors|length > 0 %}
+        Added colors:
+        {% endif %}
+        <table>
+            {% for i, color in colors %}
+                <tr>
+                    <td>
+                        <div style="width: 50px; height: 50px; background-color: {{ color }};"></div>
+                    </td>
+                    <td>
+                        <form method="POST">
+                            <input type="hidden" name="color" value="{{ i }}">
+                            <input type="submit" name="delete_color" value="x">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <!-- show show image and possible operations -->
+        {% if image_exists %}
+            <form method="post">
+                <input type="submit" name="rotate90" value="Rotate">
+            </form>
+
+            <!-- <form method="post">
+                <input type="submit" name="grad" value="Gradient/discrete">
+            </form> -->
+
+            <!-- show preview -->
+            <img src="data:image/png;base64,{{ image }}" alt="Array Image">
+
+            <form method="post">
+                <input type="submit" name="save" value="Save">
+            </form>
+        {% endif %}
+    </center>
+</body>
+
+</html>

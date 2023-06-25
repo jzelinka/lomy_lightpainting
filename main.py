@@ -91,7 +91,7 @@ def Off():
 
 @FlaskApp.route('/simple_redir')
 def Simple_redir():
-    return redirect(url_for(Simple))
+    return redirect(url_for('Simple'))
 
 
 @FlaskApp.route('/simple', methods=['GET', 'POST'])
@@ -112,7 +112,7 @@ def Simple():
             FlaskApp.logger.info("changing grad/just light model")
         elif request.form.get('start') == "START":
             SimpleInterface.display_image()
-        return redirect(url_for(Simple_redir))
+        return redirect(url_for('Simple_redir'))
         
         # TODO somehow clear the form
 

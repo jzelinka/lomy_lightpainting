@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple color mixer</title>
+</head>
+
+<body>
+    <h1>My color mixer</h1>
+    <!-- add color -->
+    <form method="POST">
+        <input type="number" value="0" name="color_r">
+        <input type="number" value="0" name="color_g">
+        <input type="number" value="0" name="color_b">
+        <input type="color" name="easy_color" id="">
+        <input type="submit" name="add_color" value="Add color">
+    </form>
+
+    <!-- TODO show added colors with delete button -->
+
+    <!-- horizontal/vertical -->
+    <!-- continous/hard edges -->
+    <form method="post">
+        <input type="submit" name="rotate90" value="Flip">
+    </form>
+
+    <form method="post">
+        <input type="submit" name="grad" value="Gradient/discrete">
+    </form>
+
+    <!-- show preview -->
+
+    <!-- save preview to images -->
+    <form method="POST"">
+        <input type="submit" name="start" value="START">
+    </form>
+</body>
+
+</html>

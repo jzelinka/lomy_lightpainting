@@ -7,6 +7,7 @@ from threading import Thread
 ## custom defined imports
 from neopixelWrapper import DotStarWrapper
 from tablegenerator import TableGenerator
+from simpleInterface import SimpleInterface
 
 dictConfig({
     'version': 1,
@@ -26,12 +27,14 @@ dictConfig({
 
 templateTableRowPath = os.path.join('templates', 'pictureTableRow.html')
 templateTablePath = os.path.join('templates', 'picturesTable.html')
+templeteSimple = os.path.join('templates', 'simple.html')
 pic_dir = 'static/pictures'
 
 
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
+SimpleInterface = SimpleInterface(templeteSimple)
 neopixel = DotStarWrapper(0.05)
 
 @FlaskApp.route('/', methods=['GET','POST'])
@@ -89,10 +92,28 @@ def Off():
 @FlaskApp.route('/simple', methods=['GET', 'POST'])
 def Simple():
     FlaskApp.logger.info("Rendering simple.html")
+    if request.method == 'POST':
+        print(request.form)
+        if request.form.get('add_color') == 'Add color':
+            # TODO form validation
+            # dont have to do if i have colors
+            r = request.form.get('color_r')
+            g = request.form.get('color_g')
+            b = request.form.get('color_b')
+            SimpleInterface.add_color((int(r), int(g), int(b)))
+        elif request.form.get('rotate90'):
+            FlaskApp.logger.info("rotating 90 degs")
+        elif request.form.get('grad'):
+            FlaskApp.logger.info("changing grad/just light model")
+        elif request.form.get('start') == "START":
+            SimpleInterface.display_image()
+        
+        # TODO somehow clear the form
+
     # if request
     # prepare functions to create numpy arrays with appropriate pixel values
     # make numpy array with pixels
-    return render_template('simple.html')
+    return SimpleInterface.render()
 
 def removeFile(filename: str):
     if os.path.isfile(os.path.join(pic_dir, filename)):

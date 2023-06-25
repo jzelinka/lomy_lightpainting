@@ -100,20 +100,20 @@ def Simple_redir():
 def Simple():
     FlaskApp.logger.info("Rendering simple.html")
     if request.method == 'POST':
-        print(request.form)
         if request.form.get('add_color') == 'Add color':
-            # TODO form validation
-            # dont have to do if i have colors
-            r = request.form.get('color_r')
-            g = request.form.get('color_g')
-            b = request.form.get('color_b')
-            SimpleInterface.add_color((int(r), int(g), int(b)))
+            color = request.form.get('color')
+            SimpleInterface.add_color(color)
         elif request.form.get('rotate90'):
             FlaskApp.logger.info("rotating 90 degs")
+            SimpleInterface.rotate90()
         elif request.form.get('grad'):
             FlaskApp.logger.info("changing grad/just light model")
         elif request.form.get('start') == "START":
             SimpleInterface.display_image()
+        elif request.form.get('delete_color'):
+            color_idx = request.form.get('color')
+            FlaskApp.logger.info(f"Deleting color number {color_idx}")
+            SimpleInterface.remove_color(color_idx)
         return redirect(url_for('Simple_redir'))
         
         # TODO somehow clear the form

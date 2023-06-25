@@ -2,16 +2,23 @@
 <html>
 
 <head>
-    <title>Simple color mixer</title>
+    <title>Color mixer</title>
 </head>
 
 <body>
     <center>
-        <h1>My color mixer</h1>
+        <h1>Color mixer</h1>
+        Mix colors, create picture, save and play it from the <a href="/">player</a>
         <!-- add color -->
         <form method="POST">
             <input type="color" name="color">
             <input type="submit" name="add_color" value="Add color">
+        </form>
+
+        <!-- width -->
+        <form method="POST">
+            <input type="number" name="width" value="{{ width }}" min="10" max="1000">
+            <input type="submit" name="set_width" value="Set width">
         </form>
 
         <!-- display colors -->
@@ -40,19 +47,15 @@
                 <input type="submit" name="rotate90" value="Rotate">
             </form>
 
-            <form method="post">
+            <!-- <form method="post">
                 <input type="submit" name="grad" value="Gradient/discrete">
-            </form>
-
-            <form method="post">
-                <input type="submit" name="save" value="Save">
-            </form>
+            </form> -->
 
             <!-- show preview -->
             <img src="data:image/png;base64,{{ image }}" alt="Array Image">
 
-            <form method="POST"">
-                <input type="submit" name="start" value="START">
+            <form method="post">
+                <input type="submit" name="save" value="Save">
             </form>
         {% endif %}
     </center>

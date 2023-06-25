@@ -35,7 +35,8 @@ class simple_interface():
                                image_exists=self.image_exists,
                                grad=self.grad,
                                discrete=self.discrete,
-                               image=self.image
+                               image=self.image,
+                               width=self.width
                                )
     
     def colors_to_rgb(self):
@@ -79,10 +80,6 @@ class simple_interface():
 
         return image_base64
         
-
-    def add_to_pictures(self):
-        pass
-
     def add_color(self, color):
         print("Simple interface: adding color")
         self.colors.append(color)
@@ -98,12 +95,7 @@ class simple_interface():
         self.grad = not self.grad
         self.discrete = not self.discrete
 
-    def display_image(self):
-        # TODO ask the neopixel wrapper to show the image
-        print("Displaying the image onto the light bar.")
-        pass
-    
-    def save_image(self):
+    def add_to_pictures(self):
         print("Saving the image to the static folder")
         img = self.create_np_representation()
         img_name = "from_color_mixer"
@@ -113,4 +105,5 @@ class simple_interface():
 
         plt.imsave(os.path.join(self.static_dir, img_name + "_" + str(count) + ".png"), img)
     
-        
+    def set_width(self, width):
+        self.width = int(width)

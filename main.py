@@ -111,12 +111,16 @@ def Simple():
 
         elif request.form.get('grad'):
             FlaskApp.logger.info("changing grad/just light model")
+            simple_interface.flip_grad_discrete()
 
         elif request.form.get('start') == "START":
             simple_interface.display_image()
         
         elif request.form.get('save'):
-            simple_interface.save_image()
+            simple_interface.add_to_pictures()
+        
+        elif request.form.get('set_width'):
+            simple_interface.set_width(request.form.get('width'))
 
         elif request.form.get('delete_color'):
             color_idx = request.form.get('color')

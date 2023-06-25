@@ -89,6 +89,11 @@ def Off():
     FlaskApp.logger.info("Rendering off.html")
     return render_template('off.html')
 
+@FlaskApp.route('/simple_redir')
+def Simple_redir():
+    return redirect(url_for(Simple))
+
+
 @FlaskApp.route('/simple', methods=['GET', 'POST'])
 def Simple():
     FlaskApp.logger.info("Rendering simple.html")
@@ -107,6 +112,7 @@ def Simple():
             FlaskApp.logger.info("changing grad/just light model")
         elif request.form.get('start') == "START":
             SimpleInterface.display_image()
+        return redirect(url_for(Simple_redir))
         
         # TODO somehow clear the form
 

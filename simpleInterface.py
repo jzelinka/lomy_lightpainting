@@ -6,13 +6,15 @@ import io
 import base64
 
 class simple_interface():
-    def __init__(self, template, pixel_height) -> None:
+    def __init__(self, template, height, static_dir) -> None:
         self.colors = []
-        self.orientation = None
+        self.orientation = 0
         self.templatePath = template
         self.grad = False
         self.discrete = True
-        self.pixel_height = pixel_height
+        self.height = height
+        self.width = 400
+        self.static_dir = static_dir
 
         # numpy array for storing the image
         self.image_exists = False
@@ -23,8 +25,7 @@ class simple_interface():
         # if i have more than one color create the image to some static file
         if len(self.colors) > 0:
             self.image_exists = True
-            # TODO create the image
-            self.image = self.create_image()
+            self.image = self.create_img_buffer()
         else:
             self.image_exists = False
             self.image = None
@@ -43,14 +44,30 @@ class simple_interface():
             hex_code = hex_code.lstrip('#')
             rgb_colors.append(tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4)))
         return rgb_colors
-
-    def create_image(self):
+    
+    def create_np_representation(self):
         rgb_colors = self.colors_to_rgb()
-        img = np.zeros((self.pixel_height, self.pixel_height, 3), dtype=np.uint8)
-        # TODO improve to show all colors
-        for rgb_color in rgb_colors:
-            img[:, :] = rgb_color
+        img = np.zeros((self.height, self.width, 3), dtype=np.uint8)
+        # TODO add gradient
 
+        for i, rgb_color in enumerate(rgb_colors):
+            if self.orientation == 0:
+                column_size = self.height // len(rgb_colors)
+                img[i * column_size : (i + 1) * column_size, :] = rgb_color
+            elif self.orientation == 1:
+                column_size = self.width // len(rgb_colors)
+                img[:, i * column_size : (i + 1) * column_size] = rgb_color
+            elif self.orientation == 2:
+                column_size = self.height // len(rgb_colors)
+                img[(len(rgb_colors) - i - 1) * column_size : (len(rgb_colors) - i) * column_size, :] = rgb_color
+            elif self.orientation == 3:
+                column_size = self.width // len(rgb_colors)
+                img[:, (len(rgb_colors) - i - 1) * column_size : (len(rgb_colors) - i) * column_size] = rgb_color
+        return img
+
+
+    def create_img_buffer(self):
+        img = self.create_np_representation()
 
         # Save image to a buffer
         buffer = io.BytesIO()
@@ -72,8 +89,7 @@ class simple_interface():
         print(self.colors)
 
     def rotate90(self):
-        # TODO prepare the numpy array so that it is rotated
-        pass
+        self.orientation = (self.orientation + 1) % 4
 
     def remove_color(self, color_idx):
         self.colors.pop(int(color_idx))
@@ -86,6 +102,15 @@ class simple_interface():
         # TODO ask the neopixel wrapper to show the image
         print("Displaying the image onto the light bar.")
         pass
+    
+    def save_image(self):
+        print("Saving the image to the static folder")
+        img = self.create_np_representation()
+        img_name = "from_color_mixer"
+        count = 0
+        while os.path.isfile(os.path.join(self.static_dir, img_name + "_" + str(count) + ".png")):
+            count += 1
 
-    def update_preview(self):
-        pass
+        plt.imsave(os.path.join(self.static_dir, img_name + "_" + str(count) + ".png"), img)
+    
+        

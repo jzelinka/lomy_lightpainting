@@ -14,7 +14,7 @@
             <input type="submit" name="add_color" value="Add color">
         </form>
 
-        <!-- TODO show added colors with delete button -->
+        <!-- display colors -->
         {% if colors|length > 0 %}
         Added colors:
         {% endif %}
@@ -34,27 +34,27 @@
             {% endfor %}
         </table>
 
-
-        <!-- horizontal/vertical -->
-        <!-- continous/hard edges -->
+        <!-- show show image and possible operations -->
         {% if image_exists %}
             <form method="post">
-                <input type="submit" name="rotate90" value="Flip">
+                <input type="submit" name="rotate90" value="Rotate">
             </form>
 
             <form method="post">
                 <input type="submit" name="grad" value="Gradient/discrete">
             </form>
 
+            <form method="post">
+                <input type="submit" name="save" value="Save">
+            </form>
+
             <!-- show preview -->
+            <img src="data:image/png;base64,{{ image }}" alt="Array Image">
+
             <form method="POST"">
                 <input type="submit" name="start" value="START">
             </form>
-            <img src="data:image/png;base64,{{ image }}" alt="Array Image">
         {% endif %}
-
-        <!-- save preview to images -->
-
     </center>
 </body>
 

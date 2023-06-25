@@ -28,14 +28,15 @@ dictConfig({
 templateTableRowPath = os.path.join('templates', 'pictureTableRow.html')
 templateTablePath = os.path.join('templates', 'picturesTable.html')
 templeteSimple = os.path.join('templates', 'simple.html')
-pic_dir = 'static/pictures'
+static_dir = 'static'
+pic_dir = os.path.join(static_dir, 'pictures')
 
 
 
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
 neopixel = DotStarWrapper(0.05)
-simple_interface = simple_interface(templeteSimple, neopixel.num_pixels)
+simple_interface = simple_interface(templeteSimple, neopixel.num_pixels, pic_dir)
 
 @FlaskApp.route('/img_redirect')
 def Img_redirect():
@@ -113,6 +114,9 @@ def Simple():
 
         elif request.form.get('start') == "START":
             simple_interface.display_image()
+        
+        elif request.form.get('save'):
+            simple_interface.save_image()
 
         elif request.form.get('delete_color'):
             color_idx = request.form.get('color')
@@ -121,11 +125,6 @@ def Simple():
 
         return redirect(url_for('Simple_redir'))
         
-        # TODO somehow clear the form
-
-    # if request
-    # prepare functions to create numpy arrays with appropriate pixel values
-    # make numpy array with pixels
     return simple_interface.render()
 
 def removeFile(filename: str):

@@ -37,6 +37,10 @@ tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir
 SimpleInterface = SimpleInterface(templeteSimple)
 neopixel = DotStarWrapper(0.05)
 
+@FlaskApp.route('/img_redirect')
+def Img_redirect():
+    return redirect(url_for('Index'))
+
 @FlaskApp.route('/', methods=['GET','POST'])
 def Index():
     if request.method == 'POST':
@@ -73,12 +77,10 @@ def Index():
                     FlaskApp.logger.info(f"Starting {image_path}")
                     neopixel.load_image(image_path)
 
-        FlaskApp.logger.info("Generating table of available pictures")
-        return tableGenerator.createPicturesTable()
+        return redirect(url_for('Img_redirect'))
     
-    elif request.method == 'GET':
-        FlaskApp.logger.info("Generating table of available pictures")
-        return tableGenerator.createPicturesTable()
+    FlaskApp.logger.info("Generating table of available pictures")
+    return tableGenerator.createPicturesTable()
 
 @FlaskApp.route('/off', methods=['GET', 'POST'])
 def Off():

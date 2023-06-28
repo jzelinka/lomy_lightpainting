@@ -31,11 +31,9 @@ templeteSimple = os.path.join('templates', 'simple.html')
 static_dir = 'static'
 pic_dir = os.path.join(static_dir, 'pictures')
 
-
-
 FlaskApp = Flask(__name__)  
 tableGenerator = TableGenerator(templateTablePath, templateTableRowPath, pic_dir)
-neopixel = DotStarWrapper(0.05)
+neopixel = DotStarWrapper()
 simple_interface = simple_interface(templeteSimple, neopixel.num_pixels, pic_dir)
 
 @FlaskApp.route('/img_redirect')
@@ -64,24 +62,51 @@ def Index():
 
         ## check status of buttons
         else:
-            FlaskApp.logger.info("Checking all pictures to match button request...")
-            for picture_path in os.listdir(pic_dir):
+            tempStop = request.form.get('stop')
 
-                FlaskApp.logger.info(f"Checking {picture_path}")
+            if request.form.get('set_delay') != None:
+                neopixel.ledDelay = int(request.form.get('delay'))/1000
+                return redirect(url_for('Img_redirect'))
+            
+            elif request.form.get('set_brightness') != None:
+                neopixel.ledBrightness = int(request.form.get('brightness'))/100
+                return redirect(url_for('Img_redirect'))
+            
+            elif tempStop != None:
+                neopixel.stop_printing()
+                return redirect(url_for('Img_redirect'))
+            
+            else:
+                FlaskApp.logger.info("Checking all pictures to match button request...")
+                for picture_path in os.listdir(pic_dir):
 
-                if request.form.get(f'delete-{picture_path}') == 'DELETE':
-                    FlaskApp.logger.info(f"Deleting {picture_path}")
-                    removeFile(picture_path)
+                    FlaskApp.logger.info(f"Checking {picture_path}")
 
-                elif request.form.get(f'start-{picture_path}') == 'START':
-                    image_path = os.path.join(pic_dir, picture_path)
-                    FlaskApp.logger.info(f"Starting {image_path}")
-                    neopixel.load_image(image_path)
+                    if request.form.get(f'delete-{picture_path}') == 'DELETE':
+                        FlaskApp.logger.info(f"Deleting {picture_path}")
+                        removeFile(picture_path)
+
+                    elif request.form.get(f'start-{picture_path}') == 'START':
+                        image_path = os.path.join(pic_dir, picture_path)
+                        FlaskApp.logger.info(f"Starting {image_path}")
+                        neopixel.load_image(image_path)
 
         return redirect(url_for('Img_redirect'))
     
     FlaskApp.logger.info("Generating table of available pictures")
-    return tableGenerator.createPicturesTable()
+
+    ## rewrite index.html
+    htmlfile = open(os.path.join('templates', 'index.html'), 'w')
+    htmlfile.write(tableGenerator.createPicturesTable())
+    htmlfile.close()
+
+    FlaskApp.logger.info("Rendering index.html")
+    FlaskApp.logger.info(f"Delay: {neopixel.ledDelay}")
+    FlaskApp.logger.info(f"Brightness: {neopixel.ledBrightness}")
+    FlaskApp.logger.info(f"Printing: {neopixel.isLoaded}")
+
+    return render_template('index.html', delay=int(neopixel.ledDelay*1000), brightness=int(neopixel.ledBrightness*100))
+    
 
 @FlaskApp.route('/off', methods=['GET', 'POST'])
 def Off():
@@ -138,6 +163,6 @@ def removeFile(filename: str):
     return False
 
 if __name__ == "__main__":
+        FlaskApp.run(host='0.0.0.0', debug=True, port=80)
         imageThread = Thread(target=neopixel.print_image, daemon=True)
         imageThread.start()
-        FlaskApp.run(host='0.0.0.0', debug=True)

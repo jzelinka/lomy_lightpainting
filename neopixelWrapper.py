@@ -3,13 +3,19 @@ import adafruit_dotstar as dotstar
 from PIL import Image
 
 class DotStarWrapper:
-    def __init__(self, delay):
+    def __init__(self):
         self.num_pixels = 216 # Number of pixels in the DotStar strip
         self.pin_sck = 11
         self.pin_mosi = 10
 
+        ## milliseconds expected
+        self.ledDelay = 0.05
+
+        ## brightness between 0 and 1
+        self.ledBrightness = 0.1
+
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        # self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=0.1, baudrate=3000000, auto_write=False)
+        # self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=self.brightness, baudrate=3000000, auto_write=False)
         self.pixels = []
         
         ## image data
@@ -19,9 +25,6 @@ class DotStarWrapper:
 
         self.lineIndex = 0
         self.lastPrintTime = 0
-
-        ## milliseconds expected
-        self.ledDelay = delay
 
         self.isLoaded = False
 
@@ -55,6 +58,9 @@ class DotStarWrapper:
         self.isLoaded = True
     
     def print_image(self):
+        ## change the brightness (might be changed by the user)
+        self.pixels.brightness = self.ledBrightness
+
         ## infinite loop
         while True:
             if self.isLoaded:
@@ -88,3 +94,11 @@ class DotStarWrapper:
         self.lastPrintTime = current_time
         print('Printing line', self.lineIndex)
         return True  # Image printing is in progress
+
+    def stop_printing(self):
+        self.isLoaded = False
+        self.lineIndex = 0
+        self.lastPrintTime = 0
+        self.pixels.fill((0,0,0))
+        self.pixels.show()
+        print('Stopped printing')

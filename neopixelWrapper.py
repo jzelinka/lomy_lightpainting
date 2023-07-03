@@ -22,7 +22,7 @@ class DotStarWrapper:
         self.image = None
         self.imageWidth = None
         self.imageHeight = None
-
+ 
         self.lineIndex = 0
         self.lastPrintTime = 0
 
@@ -54,7 +54,7 @@ class DotStarWrapper:
         self.lineIndex = 0
         self.lastPrintTime = 0
 
-        self.pixels.brightness = 0.1
+        self.pixels.brightness = self.ledBrightness
         self.isLoaded = True
     
     def print_image(self):

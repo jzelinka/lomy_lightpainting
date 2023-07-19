@@ -15,8 +15,8 @@ class DotStarWrapper:
         self.ledBrightness = 0.1
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
-        # self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=self.brightness, baudrate=3000000, auto_write=False)
-        self.pixels = []
+        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=self.ledBrightness, baudrate=1000000, auto_write=False)
+        #self.pixels = []
         
         ## image data
         self.image = None
@@ -51,16 +51,16 @@ class DotStarWrapper:
         # resize and convert the image into a RGB matrix
         self.image = originalImage.resize((self.new_width, self.new_height)).convert("RGB")
 
-        self.lineIndex = 0
-        self.lastPrintTime = 0
-
-        self.pixels.brightness = 0.1
-        self.isLoaded = True
+        ## is controlled by single button
+        # self.lineIndex = 0
+        # self.lastPrintTime = 0
+        # self.pixels.brightness = self.ledBrightness
+        # self.isLoaded = True
     
     def print_image(self):
         ## change the brightness (might be changed by the user)
         self.pixels.brightness = self.ledBrightness
-
+        print(self.pixels.brightness)
         ## infinite loop
         while True:
             if self.isLoaded:
@@ -85,7 +85,7 @@ class DotStarWrapper:
             x = self.lineIndex
             r, g, b = self.image.getpixel((x, y))
             pixel_index = y  # Assuming a vertical line representation
-            self.pixels[pixel_index] = (r, g, b)
+            self.pixels[self.num_pixels - pixel_index - 1] = (r, g, b)
 
         # Update the Neopixels to display the current line
         self.pixels.show()
@@ -102,3 +102,9 @@ class DotStarWrapper:
         self.pixels.fill((0,0,0))
         self.pixels.show()
         print('Stopped printing')
+
+    def start_printing(self):
+        self.lineIndex = 0
+        self.lastPrintTime = 0
+        self.pixels.brightness = self.ledBrightness
+        self.isLoaded = True

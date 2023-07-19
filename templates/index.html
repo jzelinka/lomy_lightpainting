@@ -30,7 +30,7 @@
                 <td style="padding-right: 3px;">Brightness (%):</td>
                 <td>
                     <form style="padding: 10px;" method="POST">
-                        <input type="number" name="brightness" value="{{ brightness }}" min="1" max="100">
+                        <input type="number" name="brightness" value="{{ brightness }}" min="0" max="100">
                         <input type="submit" name="set_brightness" value="Set brightness">
                     </form>
                 </td>
@@ -40,6 +40,14 @@
                 <center>
                     <form style="padding: 3px; padding-top: 12px;" method="POST">
                         <input style="font-size: 32px; padding-left: 20px; padding-right: 20px; background-color: crimson;" type="submit" name="stop" value="Stop">
+                    </form>
+                </center>
+            </tr>
+            <tr>
+                <td colspan="2">
+                <center>
+                    <form style="padding: 3px; padding-top: 12px;" method="POST">
+                        <input style="font-size: 32px; padding-left: 20px; padding-right: 20px; background-color: green;" type="submit" name="start" value="Start">
                     </form>
                 </center>
             </tr>
@@ -58,15 +66,140 @@
                 <th style="padding: 10px;">Removal</th>
             </tr>
             <tr>
-    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="START" name="start-01230035-2.jpg" style="color: green;"/></form></td>
-    <td style="padding: 10px;"><img src="static\pictures/01230035-2.jpg" alt="Picture preview", style="height: 200px;"></td>
-    <td style="padding: 10px;"><p>01230035-2.jpg</p></td>
-    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-01230035-2.jpg" style="color: orangered;"/></form></td>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_20230713_224426.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_20230713_224426.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_20230713_224426.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_20230713_224426.png" style="color: orangered;"/></form></td>
 </tr><tr>
-    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="START" name="start-TROJA_2-2.jpg" style="color: green;"/></form></td>
-    <td style="padding: 10px;"><img src="static\pictures/TROJA_2-2.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-signal-2023-07-12-19-32-07-926.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/signal-2023-07-12-19-32-07-926.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>signal-2023-07-12-19-32-07-926.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-signal-2023-07-12-19-32-07-926.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_0518.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_0518.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_0518.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_0518.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-Snapchat-1286021358.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/Snapchat-1286021358.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>Snapchat-1286021358.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-Snapchat-1286021358.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG-20230712-WA0003.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG-20230712-WA0003.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG-20230712-WA0003.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG-20230712-WA0003.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-71A909D9-B3CC-4400-AB01-7C2D1DE50A43.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/71A909D9-B3CC-4400-AB01-7C2D1DE50A43.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>71A909D9-B3CC-4400-AB01-7C2D1DE50A43.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-71A909D9-B3CC-4400-AB01-7C2D1DE50A43.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-9E6901C2-9359-49DF-97A2-5B4D1A34C9EB.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/9E6901C2-9359-49DF-97A2-5B4D1A34C9EB.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>9E6901C2-9359-49DF-97A2-5B4D1A34C9EB.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-9E6901C2-9359-49DF-97A2-5B4D1A34C9EB.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_0520.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_0520.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_0520.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_0520.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-MAZ_1517_705915_transparent.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/MAZ_1517_705915_transparent.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>MAZ_1517_705915_transparent.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-MAZ_1517_705915_transparent.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-from_color_mixer_1.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/from_color_mixer_1.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>from_color_mixer_1.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-from_color_mixer_1.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-gradient1.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/gradient1.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>gradient1.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-gradient1.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_20230706_200509.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_20230706_200509.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_20230706_200509.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_20230706_200509.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IF_8481.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IF_8481.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IF_8481.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IF_8481.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_20230713_224426.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_20230713_224426.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_20230713_224426.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_20230713_224426.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-20230113_123602.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/20230113_123602.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>20230113_123602.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-20230113_123602.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_0493.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_0493.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_0493.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_0493.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-TROJA_2-2.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/TROJA_2-2.jpg" alt="Picture preview", style="height: 200px;"></td>
     <td style="padding: 10px;"><p>TROJA_2-2.jpg</p></td>
     <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-TROJA_2-2.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-Snapchat-1908432066.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/Snapchat-1908432066.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>Snapchat-1908432066.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-Snapchat-1908432066.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-from_color_mixer_0.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/from_color_mixer_0.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>from_color_mixer_0.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-from_color_mixer_0.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_0491.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_0491.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_0491.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_0491.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-signal-2023-07-12-19-32-07-926.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/signal-2023-07-12-19-32-07-926.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>signal-2023-07-12-19-32-07-926.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-signal-2023-07-12-19-32-07-926.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-depositphotos_27899565-stock-photo-red-drum-kit-isolated-on.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/depositphotos_27899565-stock-photo-red-drum-kit-isolated-on.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>depositphotos_27899565-stock-photo-red-drum-kit-isolated-on.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-depositphotos_27899565-stock-photo-red-drum-kit-isolated-on.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-MAZ_1517_705915_black.png" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/MAZ_1517_705915_black.png" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>MAZ_1517_705915_black.png</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-MAZ_1517_705915_black.png" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-gradient2.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/gradient2.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>gradient2.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-gradient2.jpg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-E70917BA-56C2-4596-B8BD-A24E4D14A4FB.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/E70917BA-56C2-4596-B8BD-A24E4D14A4FB.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>E70917BA-56C2-4596-B8BD-A24E4D14A4FB.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-E70917BA-56C2-4596-B8BD-A24E4D14A4FB.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-IMG_0494.jpeg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/IMG_0494.jpeg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>IMG_0494.jpeg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-IMG_0494.jpeg" style="color: orangered;"/></form></td>
+</tr><tr>
+    <td style="padding: 30px;"><form method="post" action="/"><input type="submit" value="PREPARE" name="prepare-Snapchat-1117263049.jpg" style="color: goldenrod;"/></form></td>
+    <td style="padding: 10px;"><img src="static/pictures/Snapchat-1117263049.jpg" alt="Picture preview", style="height: 200px;"></td>
+    <td style="padding: 10px;"><p>Snapchat-1117263049.jpg</p></td>
+    <td style="padding: 10px;"><form method="post" action="/"><input type="submit" value="DELETE" name="delete-Snapchat-1117263049.jpg" style="color: orangered;"/></form></td>
 </tr>
             </table>
 

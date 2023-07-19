@@ -63,33 +63,35 @@ def Index():
         ## check status of buttons
         else:
             tempStop = request.form.get('stop')
+            tempStart = request.form.get('start')
 
             if request.form.get('set_delay') != None:
                 neopixel.ledDelay = int(request.form.get('delay'))/1000
-                return redirect(url_for('Img_redirect'))
             
-            elif request.form.get('set_brightness') != None:
+            if request.form.get('set_brightness') != None:
                 neopixel.ledBrightness = int(request.form.get('brightness'))/100
-                return redirect(url_for('Img_redirect'))
             
-            elif tempStop != None:
+            if tempStop != None:
+                FlaskApp.logger.info("Stopped printing with button")
                 neopixel.stop_printing()
-                return redirect(url_for('Img_redirect'))
+
+            if tempStart != None:
+                FlaskApp.logger.info("Starting printing with button")
+                neopixel.start_printing()
             
-            else:
-                FlaskApp.logger.info("Checking all pictures to match button request...")
-                for picture_path in os.listdir(pic_dir):
+            FlaskApp.logger.info("Checking all pictures to match button request...")
+            for picture_path in os.listdir(pic_dir):
+                
+                FlaskApp.logger.info(f"Checking {picture_path}")
 
-                    FlaskApp.logger.info(f"Checking {picture_path}")
+                if request.form.get(f'delete-{picture_path}') == 'DELETE':
+                    FlaskApp.logger.info(f"Deleting {picture_path}")
+                    removeFile(picture_path)
 
-                    if request.form.get(f'delete-{picture_path}') == 'DELETE':
-                        FlaskApp.logger.info(f"Deleting {picture_path}")
-                        removeFile(picture_path)
-
-                    elif request.form.get(f'start-{picture_path}') == 'START':
-                        image_path = os.path.join(pic_dir, picture_path)
-                        FlaskApp.logger.info(f"Starting {image_path}")
-                        neopixel.load_image(image_path)
+                elif request.form.get(f'prepare-{picture_path}') == 'PREPARE':
+                    image_path = os.path.join(pic_dir, picture_path)
+                    FlaskApp.logger.info(f"Preparing {image_path}")
+                    neopixel.load_image(image_path)
 
         return redirect(url_for('Img_redirect'))
     
@@ -163,6 +165,6 @@ def removeFile(filename: str):
     return False
 
 if __name__ == "__main__":
-        FlaskApp.run(host='0.0.0.0', debug=True, port=80)
         imageThread = Thread(target=neopixel.print_image, daemon=True)
         imageThread.start()
+        FlaskApp.run(host='0.0.0.0', debug=True, port=80)

@@ -30,7 +30,7 @@
                 <td style="padding-right: 3px;">Brightness (%):</td>
                 <td>
                     <form style="padding: 10px;" method="POST">
-                        <input type="number" name="brightness" value="{{ brightness }}" min="1" max="100">
+                        <input type="number" name="brightness" value="{{ brightness }}" min="0" max="100">
                         <input type="submit" name="set_brightness" value="Set brightness">
                     </form>
                 </td>
@@ -40,6 +40,14 @@
                 <center>
                     <form style="padding: 3px; padding-top: 12px;" method="POST">
                         <input style="font-size: 32px; padding-left: 20px; padding-right: 20px; background-color: crimson;" type="submit" name="stop" value="Stop">
+                    </form>
+                </center>
+            </tr>
+            <tr>
+                <td colspan="2">
+                <center>
+                    <form style="padding: 3px; padding-top: 12px;" method="POST">
+                        <input style="font-size: 32px; padding-left: 20px; padding-right: 20px; background-color: green;" type="submit" name="start" value="Start">
                     </form>
                 </center>
             </tr>

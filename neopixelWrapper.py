@@ -15,14 +15,18 @@ class DotStarWrapper:
         self.ledBrightness = 0.1
 
         # auto_write=False means that the pixels won't change colors until you call pixels.show()
+<<<<<<< HEAD
         self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=self.ledBrightness, baudrate=1000000, auto_write=False)
+=======
+        self.pixels = dotstar.DotStar(self.pin_sck, self.pin_mosi, self.num_pixels, brightness=self.ledBrightness, baudrate=3000000, auto_write=False)
+>>>>>>> e555155419eefed3678b5e40b766e4dd1a92fe3d
         #self.pixels = []
         
         ## image data
         self.image = None
         self.imageWidth = None
         self.imageHeight = None
-
+ 
         self.lineIndex = 0
         self.lastPrintTime = 0
 

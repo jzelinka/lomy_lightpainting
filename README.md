@@ -1,1 +1,1 @@
-# lomy_lightpainting
+The repository contains a light painting application. A Flask web application running on RPi 4B controls a light strip. The web application can be accessed using an access point on the RPi. When photographed on a longer exposure, the light strip displays individual bars of a picture and thus forming the whole image.

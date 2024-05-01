@@ -1,17 +1,18 @@
 # Lightpainting stick
-The project aims to create a light painting stick to enhance photos taken with a camera over prolonged exposure.
-A Raspberry Pi is used as a controller of the LED strip.
-Additionally, the Raspberry Pi is configured as a WiFi access point.
-The stick is then controlled via a web interface using devices connected to the WiFi access point.
+The project aims to create a light painting stick.
+As the name suggests the stick then helps to paint into photos taken with a camera over prolonged exposure.
+The individual LEDS are controlled by a Raspberry Pi.
+Additionally, the Raspberry Pi is configured as a WiFi access point, which serves a web app.
+Users connected to the app running on the Raspberry Pi can upload images to be drawn by the stick and control the drawing process.
 Thanks to the web interface, the need for physical buttons is eliminated.
-The web app uploads bitmap images.
-The resolution of the uploaded images is downscaled so that they draw using the stick.
-The whole stick is powered by a power bank, which makes the entire setup portable and capable of drawing even in field conditions.
+The process of uploading the images involves a downscale of thier resolution so that the pixel count matches the number of LEDs in the stick.
+Finally, the whole stick is powered by a power bank, which makes the entire setup portable and capable of drawing even in field conditions.
+The image below showcases possible results achievable with the light painting stick.
+
+![Lightpainting showcaset](figs/lightpaint_nyancat.jpg)
 
 The repository contains the code for Raspberry Pi's web interface and LED strip driver.
 The web app is implemented with the help of the `Flask` and `adafruit_dotstar` library.
-
-TODO show a picture
 
 ## Usage
 Install the required packages by running the following command:

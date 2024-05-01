@@ -33,5 +33,6 @@ self.pin_mosi = 10
 ```
 
 ### Disclaimer
-This project does not include a production-ready version, and the authors assume the user's interest in the final pictures created using the light painting stick.
+The project was developed for use at a children's summer camp.
+That is why this project does not include a production-ready version, and the authors assume the user's interest in the final pictures created using the light painting stick.
 Thus, the code does not include any reasonable security measures.

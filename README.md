@@ -1,11 +1,11 @@
 # Lightpainting stick
 The project aims to create a light painting stick.
-As the name suggests the stick then helps to paint into photos taken with a camera over prolonged exposure.
-The individual LEDS are controlled by a Raspberry Pi.
-Additionally, the Raspberry Pi is configured as a WiFi access point, which serves a web app.
+As the name suggests, the stick helps paint onto photos taken with a camera over prolonged exposure.
+A Raspberry Pi controls the individual LEDs.
+The Raspberry Pi is also configured as a WiFi access point, which serves as a web app.
 Users connected to the app running on the Raspberry Pi can upload images to be drawn by the stick and control the drawing process.
 Thanks to the web interface, the need for physical buttons is eliminated.
-The process of uploading the images involves a downscale of thier resolution so that the pixel count matches the number of LEDs in the stick.
+Uploading the images involves a downscale of their resolution so that the pixel count matches the number of LEDs in the stick.
 Finally, the whole stick is powered by a power bank, which makes the entire setup portable and capable of drawing even in field conditions.
 The image below showcases possible results achievable with the light painting stick.
 
